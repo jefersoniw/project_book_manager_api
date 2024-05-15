@@ -14,7 +14,7 @@ class BookControllerTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_books_endpoint_get(): void
+    public function test_get_books_endpoint(): void
     {
         $books = Book::factory(4)->create();
 
@@ -41,6 +41,37 @@ class BookControllerTest extends TestCase
                 '0.id' => $book->id,
                 '0.title' => $book->title,
                 '0.isbn' => $book->isbn
+            ]);
+        });
+    }
+
+    public function test_get_details_book_endpoint(): void
+    {
+        $book = Book::factory(1)->createOne();
+
+        $response = $this->getJson('/api/books/' . $book->id);
+
+        $response->assertStatus(200);
+
+        $response->assertJson(function (AssertableJson $json) use ($book) {
+            $json->hasAll([
+                'id',
+                'title',
+                'isbn',
+                'created_at',
+                'updated_at'
+            ]);
+
+            $json->whereAllType([
+                'id' => 'integer',
+                'title' => 'string',
+                'isbn' => 'string',
+            ]);
+
+            $json->whereAll([
+                'id' => $book->id,
+                'title' => $book->title,
+                'isbn' => $book->isbn
             ]);
         });
     }
