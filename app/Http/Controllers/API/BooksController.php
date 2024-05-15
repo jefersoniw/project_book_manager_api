@@ -8,8 +8,18 @@ use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
-    public function index(Book $book)
+
+    public function __construct(private Book $book)
     {
-        return response()->json($book->all());
+    }
+
+    public function index()
+    {
+        return response()->json($this->book->all());
+    }
+
+    public function show($id)
+    {
+        return response()->json($this->book->find($id));
     }
 }
