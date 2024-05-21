@@ -75,4 +75,28 @@ class BookControllerTest extends TestCase
             ]);
         });
     }
+
+    public function test_post_books_endpoint(): void
+    {
+        $book = Book::factory(1)->makeOne()->toArray();
+
+        $response = $this->postJson('/api/books', $book);
+
+        $response->assertStatus(201);
+
+        $response->assertJson(function (AssertableJson $json) use ($book) {
+            $json->hasAll([
+                'id',
+                'title',
+                'isbn',
+                'created_at',
+                'updated_at'
+            ]);
+
+            $json->whereAll([
+                'title' => $book['title'],
+                'isbn' => $book['isbn']
+            ])->etc();
+        });
+    }
 }
