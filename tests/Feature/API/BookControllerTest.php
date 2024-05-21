@@ -99,4 +99,8 @@ class BookControllerTest extends TestCase
             ])->etc();
         });
     }
+
+    public function test_put_endpoint()
+    {
+    }
 }
