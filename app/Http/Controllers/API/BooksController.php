@@ -28,4 +28,12 @@ class BooksController extends Controller
     {
         return response()->json($this->book->create($request->all()), 201);
     }
+
+    public function update($id, Request $request)
+    {
+        $book = $this->book->find($id);
+        $book->update($request->all());
+
+        return response()->json($book);
+    }
 }
