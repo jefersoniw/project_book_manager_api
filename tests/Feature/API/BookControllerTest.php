@@ -100,7 +100,7 @@ class BookControllerTest extends TestCase
         });
     }
 
-    public function test_put_endpoint()
+    public function test_put_book_endpoint()
     {
         $bookCreated = Book::factory(1)->createOne();
 
@@ -123,7 +123,7 @@ class BookControllerTest extends TestCase
         });
     }
 
-    public function test_patch_endpoint()
+    public function test_patch_book_endpoint()
     {
         $bookCreated = Book::factory(1)->createOne();
 
@@ -139,5 +139,14 @@ class BookControllerTest extends TestCase
             $json->hasAll(['id', 'title', 'isbn', 'created_at', 'updated_at']);
             $json->where('title', $book['title']);
         });
+    }
+
+    public function test_delete_book_endpoint()
+    {
+        $book = Book::factory(1)->createOne();
+
+        $response = $this->deleteJson('/api/books/' . $book->id);
+
+        $response->assertStatus(204);
     }
 }
