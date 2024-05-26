@@ -100,7 +100,53 @@ class BookControllerTest extends TestCase
         });
     }
 
-    public function test_put_endpoint()
+    public function test_put_book_endpoint()
     {
+        $bookCreated = Book::factory(1)->createOne();
+
+        $book = [
+            'title' => 'test book 1',
+            'isbn' => '123456789'
+        ];
+
+        $response = $this->putJson('/api/books/' . $bookCreated->id, $book);
+
+        $response->assertStatus(200);
+
+        $response->assertJson(function (AssertableJson $json) use ($book) {
+            $json->hasAll(['id', 'title', 'isbn', 'created_at', 'updated_at']);
+
+            $json->whereAll([
+                'title' => $book['title'],
+                'isbn' => $book['isbn']
+            ])->etc();
+        });
+    }
+
+    public function test_patch_book_endpoint()
+    {
+        $bookCreated = Book::factory(1)->createOne();
+
+        $book = [
+            'title' => 'test book 1 patch'
+        ];
+
+        $response = $this->patchJson('/api/books/' . $bookCreated->id, $book);
+
+        $response->assertStatus(200);
+
+        $response->assertJson(function (AssertableJson $json) use ($book) {
+            $json->hasAll(['id', 'title', 'isbn', 'created_at', 'updated_at']);
+            $json->where('title', $book['title']);
+        });
+    }
+
+    public function test_delete_book_endpoint()
+    {
+        $book = Book::factory(1)->createOne();
+
+        $response = $this->deleteJson('/api/books/' . $book->id);
+
+        $response->assertStatus(204);
     }
 }
