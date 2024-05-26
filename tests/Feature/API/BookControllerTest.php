@@ -122,4 +122,22 @@ class BookControllerTest extends TestCase
             ])->etc();
         });
     }
+
+    public function test_patch_endpoint()
+    {
+        $bookCreated = Book::factory(1)->createOne();
+
+        $book = [
+            'title' => 'test book 1 patch'
+        ];
+
+        $response = $this->patchJson('/api/books/' . $bookCreated->id, $book);
+
+        $response->assertStatus(200);
+
+        $response->assertJson(function (AssertableJson $json) use ($book) {
+            $json->hasAll(['id', 'title', 'isbn', 'created_at', 'updated_at']);
+            $json->where('title', $book['title']);
+        });
+    }
 }
