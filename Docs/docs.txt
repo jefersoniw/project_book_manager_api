@@ -1,0 +1,30 @@
+$ git clone https://github.com/jefersoniw/project-api-tdd.git
+
+$ cp .env.example .env 
+
+DB_CONNECTION=mysql
+DB_HOST=db_api_tdd
+DB_PORT=3306
+DB_DATABASE=db_api_tdd
+DB_USERNAME=root
+DB_PASSWORD=password
+
+REDIS_HOST=redis_api_tdd
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+$ docker compose up -d 
+
+$ docker compose exec app_api_tdd bash 
+
+$ composer install 
+
+$ php artisan key:generate
+
+$ php artisan optimize
+
+$ php artisan config:clear
+
+$ php artisan migrate
+
+$ php artisan test
