@@ -23,7 +23,7 @@ Route::group(['prefix' => 'books'], function () {
 
     Route::get('/', [BooksController::class, 'index']);
     Route::post('/', [BooksController::class, 'store']);
-    Route::get('/{id}', [BooksController::class, 'show']);
-    Route::match(['put', 'patch'], '/{id}', [BooksController::class, 'update']);
-    Route::delete('/{id}', [BooksController::class, 'delete']);
+    Route::get('/{book}', [BooksController::class, 'show']);
+    Route::match(['put', 'patch'], '/{book}', [BooksController::class, 'update']);
+    Route::delete('/{book}', [BooksController::class, 'delete']);
 });

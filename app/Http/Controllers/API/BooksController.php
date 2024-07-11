@@ -4,45 +4,42 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\BooksStoreRequest;
+use App\Http\Services\BooksService;
 use App\Models\Book;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use stdClass;
 
 class BooksController extends Controller
 {
 
-    public function __construct(private Book $book)
+    public function __construct(protected BooksService $booksService)
     {
     }
 
-    public function index()
+    public function index(): JsonResponse
     {
-        return response()->json($this->book->all());
+        return response()->json($this->booksService->allBooks());
     }
 
-    public function show($id)
+    public function show(Book $book): JsonResponse
     {
-        return response()->json($this->book->find($id));
+        return response()->json($this->booksService->book($book));
     }
 
-    public function store(BooksStoreRequest $request)
+    public function store(BooksStoreRequest $request): JsonResponse
     {
-        return response()->json($this->book->create($request->all()), 201);
+        return response()->json($this->booksService->createBook($request->all()), 201);
     }
 
-    public function update($id, Request $request)
+    public function update(Book $book, Request $request): JsonResponse
     {
-        $book = $this->book->find($id);
-        $book->update($request->all());
-
-        return response()->json($book);
+        return response()->json($this->booksService->updateBook($book, $request->all()));
     }
 
-    public function delete($id)
+    public function delete(Book $book): JsonResponse
     {
-        $book = $this->book->find($id);
-        $book->delete();
-
+        $this->booksService->deleteBook($book);
         return response()->json([], 204);
     }
 }
