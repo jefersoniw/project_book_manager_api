@@ -1,0 +1,87 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Geranciamento de Livros",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "/books"
+                ],
+                "summary": "Lista de livros cadastrados",
+                "description": "Exibindo todos os livros cadastrados.",
+                "operationId": "e76920b3713e313f9495ed5a684e2f21",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "/books"
+                ],
+                "summary": "Cadastrando um livro",
+                "description": "Cadastrando um livro.",
+                "operationId": "8a43581e1883007ef2693b82a917493e",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "isbn": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "title": "teste",
+                                    "isbn": "854624f4"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cadastrado"
+                    }
+                }
+            }
+        },
+        "/api/books/{id}": {
+            "get": {
+                "tags": [
+                    "/books"
+                ],
+                "summary": "Detalhes de um livro cadastrado",
+                "description": "Exibindo todos os livros cadastrados.",
+                "operationId": "845b21e22b34eb523c0876bdc4bb9eb0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do libro",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "/books",
+            "description": "/books"
+        }
+    ]
+}
