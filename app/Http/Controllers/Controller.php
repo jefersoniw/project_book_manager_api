@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 /**
  * @OA\Info(
- *    title="API Geranciamento de Livros",
+ *    title="API Gerenciamento de Livros",
  *    version="1.0.0",
  * ),
  *  

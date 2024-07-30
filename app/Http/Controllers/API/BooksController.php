@@ -29,7 +29,6 @@ class BooksController extends Controller
      *         description="OK"
      *     )
      * )
-     * 
      */
     public function index(): JsonResponse
     {
@@ -54,7 +53,6 @@ class BooksController extends Controller
      *         description="OK"
      *     )
      * )
-     * 
      */
     public function show(Book $book): JsonResponse
     {
@@ -88,7 +86,6 @@ class BooksController extends Controller
      *         description="Cadastrado"
      *     )
      * )
-     * 
      */
     public function store(BooksStoreRequest $request): JsonResponse
     {
