@@ -1,8 +1,8 @@
 <h3 align="center">
   <p> API REST - CONSULTA DE LIVROS </p>
 </h3>
+<img src="./public/swagger_doc.png" />
 <h1>
-  <img src="./public/swagger_img.png" />
   <p> Documentação Swagger | Endpoints </p>
 </h1>
 
@@ -91,6 +91,8 @@
   # Executa os testes criados na aplicação.
   $ php artisan test
 ```
+
+-   ### Para acessar a documentação Swagger pelo projeto acesse ➡️ http://localhost/api/doc
 
 ## 🛎️ License
 

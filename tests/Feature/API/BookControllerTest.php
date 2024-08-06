@@ -3,7 +3,6 @@
 namespace Tests\Feature\API;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Book;
 use Illuminate\Testing\Fluent\AssertableJson;
@@ -54,6 +53,7 @@ class BookControllerTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJson(function (AssertableJson $json) use ($book) {
+
             $json->hasAll([
                 'id',
                 'title',

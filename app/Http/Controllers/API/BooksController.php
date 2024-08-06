@@ -45,7 +45,7 @@ class BooksController extends Controller
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="Id do libro",
+     *         description="Id do livro",
      *         required=true,
      *     ),  
      *     @OA\Response(
@@ -92,11 +92,63 @@ class BooksController extends Controller
         return response()->json($this->booksService->createBook($request->all()), 201);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/books/{id}",
+     *     tags={"/books"},
+     *     summary="Editar um livro",
+     *     description="Atualizando dados de um livro.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Id do livro",
+     *         required=true,
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="title",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="isbn",
+     *                     type="string"
+     *                 ),
+     *                 example={"title": "teste", "isbn": "854624f4"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="Atualizado"
+     *     )
+     * )
+     */
     public function update(Book $book, Request $request): JsonResponse
     {
         return response()->json($this->booksService->updateBook($book, $request->all()));
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/books/{id}",
+     *     tags={"/books"},
+     *     summary="Excluir um livro cadastrado",
+     *     description="Excluindo um livro cadastrado.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Id do livro",
+     *         required=true,
+     *     ),  
+     *     @OA\Response(
+     *         response="200",
+     *         description="OK"
+     *     )
+     * )
+     */
     public function delete(Book $book): JsonResponse
     {
         $this->booksService->deleteBook($book);
