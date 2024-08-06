@@ -66,7 +66,70 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Id do libro",
+                        "description": "Id do livro",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "/books"
+                ],
+                "summary": "Editar um livro",
+                "description": "Atualizando dados de um livro.",
+                "operationId": "1ab6465e85ffece0f5c488a11049afaf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do livro",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "isbn": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "title": "teste",
+                                    "isbn": "854624f4"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Atualizado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "/books"
+                ],
+                "summary": "Excluir um livro cadastrado",
+                "description": "Excluindo um livro cadastrado.",
+                "operationId": "d42a3ff09d4e3e177a2ed578a72ff417",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do livro",
                         "required": true
                     }
                 ],
